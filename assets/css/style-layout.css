@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #8f5038;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+body{
+    font-size: 10.5pt;
+    line-height: 1.75em;
+    font-family: Arial, sans-serif;
+    background: #e1e4e5 url('../images/css/bg.png');
+    color: #383939;
+}
+
+br.clear {
+    clear: both;
+}
+
+h1,h2,h3,h4 {
+    /*text-transform: lowercase;*/
+    font-weight: normal;
+}
+
+h2,h3,h4 {
+    margin-bottom: 1em;
+    font-family: "PT Sans Narrow", sans-serif;
+    color: #000;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+#bg {
+    background: url('../images/css/highlight.png') top left repeat-x;
+}
+
+
+
+/** Header **/
+
+#header {
+    position: relative;
+    padding: 28px;
+    height: 126px;
+    width: 1124px;
+}
+
+#logo {
+    text-align: center;
+    position: relative;
+    margin: -14px auto;
+    height: 98px;
+    line-height: 98px;
+}
+
+#logo a {
+    text-decoration: none;
+    color: #000;
+    text-shadow: 0px 3px 0px #ffffff;
+}
+
+#logo h1 {
+    font-size: 3.25em;
+    font-family: Lobster, cursive;
+}
+
+
+/** Main **/
+
+#main {
+    position: relative;
+    padding: 0px;
+    margin: 28px 0 0 0;
+    width: 1180px;
+    color: #474747;
+}
+
+#main strong {
+    color: #242424;
+}
+
+#main h2, #main h3, #main h4 {
+    color: #0d0d0d;
+}
+
+#main ul {
+    list-style: none;
+}
+
+#main ul li {
+    padding: 8px 0 8px 0;
+    border-top: dotted 1px #bdbdbd;
+}
+
+#main ul.imageList li {
+    padding: 16px 0 16px 0;
+}
+
+#main ul li.first {
+    padding-top: 0;
+    border-top: 0;
+}
+
+
+/** Menu **/
+
+#nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1180px;
+    height: 56px;
+    line-height: 56px;
+    margin: 28px 0 0 0;
+    background: #205867;
+    font-size: 1.6em;
+    font-weight: bold;
+    font-family: "PT Sans Narrow", sans-serif;
+    border-bottom: solid 1px #1c4d5b;
+    border-top: solid 1px #ffffff;
+    text-shadow: 0 1px 0px #18434f;
+    /*text-transform: lowercase;*/
+}
+
+#nav a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#nav ul {
+    list-style: none;
+    margin: 0 auto;
+    width: 1062px;
+    text-align: center;
+}
+
+#nav ul li {
+    display: inline;
+    text-align: center;
+    padding: 0 2em 0 2em;
+}
+
+
+/** Outer **/
+
+#outer {
+    position: relative;
+    width: 1180px;
+    padding-top: 30px;
+    margin: 0 auto 0 auto;
+}
+
+
+
+#mainPanel{
+    margin: 0px 28px 0 0px;
+    padding: 20px;
+    background: #ffffff;
+    border-bottom: solid 1px #c0c0c0;
+    width: 772px;
+    height: 450px;
+    float: left;
+    text-align: center;
+}
+#rightPanel{
+    width: 300px;
+    float: right;
+    padding: 20px;
+    background: #ffffff;
+    color: #474747;
+    border-bottom: solid 1px #c0c0c0;
+    height: 450px;
+}
+
+.detailPanel{
+
+}
+
+.detailPanel .elementPanel{
+    height: 300px;
+}
+.detailPanel .elementPanel .title{
+
+}
+.detailPanel .elementPanel .sample{
+
+}
+.detailPanel .elementPanel .sample .select{
+    display: inline-block;
+}
+.detailPanel .elementPanel .sample .listen{
+    width : 20px;
+    height : 20px;
+    margin-left: 5px;
+    background-image : url('../images/ihm/listen.jpg');
+    background-size: cover;
+    display: inline-block;
+}
+
+.detailPanel .generalPanel{
+    border-top: 1px double black;
+}
+.detailPanel .generalPanel .tempo input{
+
+}
+
+
+/** Footer **/
+
+#copyright {
+    margin: 0px 0 64px 0;
+    text-align: center;
+    text-shadow: 0 1px 0 #ffffff;
+    color: #787979;
+}
+
+#copyright a {
+    color: #787979;
+}
+
+
+/** Buttons **/
+button.large{
+    width: 200px;
+    height: 25px;
+    line-height: 25px;
+    margin: 8px 0 8px 0;
+    background: #205867;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: "PT Sans Narrow", sans-serif;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+button.large:hover{
+    background-color: #13353e;
+}

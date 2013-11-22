@@ -1,0 +1,110 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Arial;
+    font-size: 12px;
+    background: #e1e4e5 url('../images/css/bg.png');
+}
+
+#Main {
+    width: 1000px;
+}
+
+/** Menu participant **/
+#nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1180px;
+    height: 56px;
+    line-height: 56px;
+    margin: 28px 0 0 0;
+    background: #205867;
+    font-size: 1.2em;
+    font-family: "PT Sans Narrow", sans-serif;
+    border-bottom: solid 1px #6f3018;
+    border-top: solid 1px #ffffff;
+    text-shadow: 0 1px 0px #6f3018;
+    /*text-transform: lowercase;*/
+}
+
+#nav a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#nav ul {
+    list-style: none;
+    margin: 0 auto;
+    width: 1062px;
+    text-align: center;
+}
+
+#nav ul li {
+    display: inline;
+    text-align: center;
+    padding: 0 1.75em 0 1.75em;
+}
+
+
+/** Content **/
+
+#Content{
+    margin: 5px;
+}
+#LeftContainer{
+    border : 1px solid black;
+    height: 550px;
+    float: left;
+    text-align: center;
+}
+#RightContainer{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    height: 550px;
+    width: 300px;
+    float: left;
+    /*background: linear-gradient(#F7F7F7, #DCDCDC) repeat scroll 0 0 transparent; */
+}
+
+.detailPanel{
+
+}
+
+.detailPanel .elementPanel{
+    height: 300px;
+}
+.detailPanel .elementPanel .title{
+
+}
+.detailPanel .elementPanel .sample{
+
+}
+.detailPanel .elementPanel .sample .select{
+    display: inline-block;
+}
+.detailPanel .elementPanel .sample .listen{
+    width : 20px;
+    height : 20px;
+    margin-left: 5px;
+    background-image : url('../images/ihm/listen.jpg');
+    background-size: cover;
+    display: inline-block;
+}
+
+.detailPanel .generalPanel{
+    border-top: 1px double black;
+}
+.detailPanel .generalPanel .tempo input{
+
+}
+
+
+/** Footer **/
+
+#Footer{
+	clear: both;
+	text-align: center;
+}

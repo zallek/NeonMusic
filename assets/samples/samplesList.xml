@@ -1,0 +1,7 @@
+<items>
+     <sound id="0" href="PacMan/PacMan_Start.wav" />
+     <sound id="1" href="PacMan/PacMan_EatFruit.wav" />
+	 <sound id="2" href="PacMan/PacMan_Ghosts.wav" />
+	 <sound id="3" href="PacMan/PacMan_Tone01.wav" />
+	 <sound id="4" href="PacMan/PacMan_Tone02.wav" />
+</items>

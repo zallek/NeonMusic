@@ -1,0 +1,43 @@
+body{
+    font-family: Arial;
+}
+
+#TimeLine {
+    width: 300px;
+    height: 200px;
+    background-color: black;
+    padding: 5px;
+}
+
+#labels {
+    width: 50px;
+    float: left;
+}
+
+.label {
+    color: #ffc000;
+    margin: 10px 5px 10px 5px;
+}
+
+#lines {
+    float: left;
+    width: 250px;
+    overflow: auto;
+    min-height: 200px;
+}
+
+.line {
+    background-color: #262626;
+    height: 20px;
+    width: 300px;
+    position: relative;
+    margin: 10px 0px 10px 0px;
+}
+
+.activation {
+    background-color: #ffc000;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    position: absolute;
+    height: 20px;
+}

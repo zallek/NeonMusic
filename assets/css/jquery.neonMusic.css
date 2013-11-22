@@ -1,0 +1,137 @@
+#NeonMusic
+{
+    /*width: 500px;
+    height: 500px; */
+    border: 1px solid #d8d8d8;
+    position: relative;
+    overflow: auto;
+}
+
+
+/******************************************/
+/*                  Grid                  */
+/******************************************/
+#NeonMusic .grid
+{
+    width: 100%;
+    height: 420px;
+    position: relative;
+}
+#NeonMusic .grid.design
+{
+    background-color: white;
+}
+#NeonMusic .grid.animation
+{
+    background-color: black;
+}
+
+
+/******************************************/
+/*                  Node                  */
+/******************************************/
+#NeonMusic .node
+{
+    position: absolute;
+}
+
+#NeonMusic .node.empty
+{
+    width: 11px;
+    height: 11px;
+    background-image: url(../images/node/emptyNode.png);
+}
+#NeonMusic .node.filled
+{
+    width: 11px;
+    height: 11px;
+    background-image: url(../images/node/blackNode.png);
+}
+#NeonMusic .node.red
+{
+    width: 11px;
+    height: 11px;
+    background-image: url(../images/node/redNode.png);
+}
+
+#NeonMusic .node.animationIdle
+{
+    width: 11px;
+    height: 11px;
+    background-color: black;
+    border-radius: 10px;
+    opacity: 0;
+}
+#NeonMusic .node.animationLight
+{
+    width: 11px;
+    height: 11px;
+    background-color: white;
+    border-radius: 10px;
+}
+#NeonMusic .node.animationActive
+{
+    width: 11px;
+    height: 11px;
+    /*background-color: #FFFFFF;
+    box-shadow: 0 0 10px #FFFFFF, 0 0 20px #ff7a17, 0 0 40px #ff7a17, 0 0 50px #ff7a17, 0 0 70px #ff7a17, 0 0 100px #ff7a17;   */
+    background-color: black;
+    border-radius: 10px;
+}
+
+
+
+/******************************************/
+/*                   Arrow                */
+/******************************************/
+#NeonMusic .arrow
+{
+    position: absolute;
+}
+
+#NeonMusic .arrow.design
+{
+    width: 10px;
+    height: 30px;
+    background-image: url(../images/arrow/designArrow.png);
+}
+
+#NeonMusic .arrow.animationIdle
+{
+    width: 10px;
+    height: 30px;
+    background-color: black;
+    border-radius: 10px;
+    opacity: 0;
+}
+#NeonMusic .arrow.animationLight
+{
+    width: 10px;
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+}
+#NeonMusic .arrow.animationActive
+{
+    width: 6px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    /*box-shadow: 0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF, 0 0 20px #ff7a17, 0 0 35px #ff7a17, 0 0 40px #ff7a17, 0 0 50px #ff7a17, 0 0 75px #ff7a17;*/
+    box-shadow: 0 0 5px #FFFFFF, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF, 0 0 20px #00CCFF, 0 0 35px #00CCFF, 0 0 40px #00CCFF, 0 0 50px #00CCFF, 0 0 75px #00CCFF;
+    opacity: 1;
+}
+
+
+
+/******************************************/
+/*              DetectionArea             */
+/******************************************/
+#NeonMusic .detectionArea{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    /*-webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;*/
+}
