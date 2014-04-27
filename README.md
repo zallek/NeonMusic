@@ -6,3 +6,5 @@ Web application for creating music using a new graphical approach (based on netw
 Prototype : http://zallek.alwaysdata.net/neonMusic.html  
 Demo : https://www.youtube.com/watch?v=NbZXJ_EoDe8
 
+Current issues :
+- When the designed network contains many loops, the navigator crash because too many memory is used -> Identify memory leaks
