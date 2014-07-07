@@ -43,27 +43,34 @@
             });
         };
 
-        var stop = false;
+        var stop;
+        var animateTempos = new Array();
         this.animate = function(){
             if(SampleManager.instance != null){
                 var tempo = SampleManager.instance.tempo();
-                var stop = false;
+                stop = false;
 
                 var parcours = function(_node){
                     if(!stop){
-                        setTimeout(function(){
-                            //Action on himself
-                            _node.type(Node.TypeEnum.ANIMATION_IDLE);
-                            //Action on parent
+                        //setTimeout(function(){
+                        //Action on himself
+                        _node.type(Node.TypeEnum.ANIMATION_IDLE);
+                        //Action on parent
 
-                            var childArrows = _node.childArrows();
-                            childArrows.forEach(function(el){
-                                if(el != null){
+                        var childArrows = _node.childArrows();
+                        childArrows.forEach(function(el){
+                            if(el != null){
+                                animateTempos.push(setTimeout(function(){
                                     el.type(Arrow.TypeEnum.ANIMATION_IDLE);
-                                    parcours(el.nextNode());
-                                }
-                            });
-                        }, tempo);
+                                    _node.type(Node.TypeEnum.ANIMATION_IDLE);
+                                    if(el.nextNode().type() != Node.TypeEnum.ANIMATION_ACTIVE){
+                                        parcours(el.nextNode());
+                                    }
+                                }, tempo * el.temps()));
+                            }
+                        });
+                       // }, tempo);
+
                         _node.type(Node.TypeEnum.ANIMATION_ACTIVE);
                         var childArrows = _node.childArrows();
                         childArrows.forEach(function(el){
@@ -75,18 +82,49 @@
                     }
                 };
 
+                //Init animation
                 grid.type(Grid.TypeEnum.ANIMATION);
+                NodeList.instance.getAllNodes().forEach(function(node){
+                    if(node != null){
+                        node.type(Node.TypeEnum.ANIMATION_IDLE);
+                        node.childArrows().forEach(function(el){
+                            if(el != null){
+                                el.type(Arrow.TypeEnum.ANIMATION_IDLE);
+                            }
+                        });
+                    }
+                });
+                //Start animation
                 NodeList.instance.getStartNodes().forEach(function(el){
                     parcours(el);
                 });
             }
         };
 
-        /**
-         * BUG
-         */
         this.stop = function(){
             stop = true;
+            for(var i=0; i< animateTempos.length; i++){
+                var t = animateTempos.pop();
+                window.clearTimeout(t);
+            }
+
+            grid.type(Grid.TypeEnum.DESIGN);
+            NodeList.instance.getAllNodes().forEach(function(node){
+                if(node != null){
+                    if(node.isStart()){
+                        node.type(Node.TypeEnum.DESIGN_START);
+                    }
+                    else{
+                        node.type(Node.TypeEnum.DESIGN_STD);
+                    }
+                    node.childArrows().forEach(function(el){
+                        if(el != null){
+                            el.type(Arrow.TypeEnum.DESIGN);
+                        }
+                    });
+                }
+            });
+
             SampleManager.instance.stopAllSamples();
         };
     };
@@ -138,10 +176,6 @@
                 return selector;
             };
 
-            var titleField;
-            var sampleField;
-            var actionField;
-
             var currentDetailObject;
             this.currentDetailObject = function(_object){
                 if(!isset(_object)){
@@ -154,11 +188,17 @@
                     currentDetailObject = _object;
                     currentDetailObject.focus();
 
+                    //Refresh display
+                    selector.empty();
+                    new TitleField(this).setContent(currentDetailObject);
+
                     //Node
                     if(_object instanceof Node){
-                        titleField.setContent(currentDetailObject);
-                        sampleField.setContent(currentDetailObject);
-                        actionField.setContent(currentDetailObject);
+                        new SampleField(this).setContent(currentDetailObject);
+                        new DeleteField(this).setContent();
+                    }
+                    else if(_object instanceof Arrow){
+                        new TempsField(this);
                     }
 
                     return true;
@@ -170,9 +210,6 @@
                 //Create DOM elements
                 parent.selector().append("<div class='"+param.className+"'>"+"</div>");
                 selector = parent.selector().children("."+param.className);
-                titleField = new TitleField(this);
-                sampleField = new SampleField(this);
-                actionField = new ActionField(this);
             }
 
             function TitleField(parent){
@@ -187,7 +224,13 @@
                 }
 
                 this.setContent = function(_object){
-                    var title = "Node : "+_object.domId();
+                    var title;
+                    if(_object instanceof Node){
+                        title = "Node : "+_object.domId();
+                    }
+                    else if(_object instanceof Arrow){
+                        title = "Arrow : "+_object.domId();
+                    }
                     selector.empty().append(title);
                 }
             }
@@ -233,7 +276,7 @@
                 }
             }
 
-            function ActionField(parent){
+            function DeleteField(parent){
                 var that = this;
                 var param = DetailPanel.el.elementPanel.Action;
                 var selector;
@@ -252,6 +295,29 @@
                         currentDetailObject.delete();
                     });
                 }
+            }
+
+            function TempsField(parent){
+                var that = this;
+                var param = DetailPanel.el.elementPanel.Temps;
+                var selector;
+
+                /** Constructor **/
+                if(isset(parent)){
+                    parent.selector().append("<div class='"+param.className+"'></div>");
+                    selector = parent.selector().children("."+param.className);
+                }
+
+                var temps = currentDetailObject.temps();
+
+                var tempsField = "Temps : ";
+                tempsField += "<input type='text' id='"+ param.Input.id + "' value='"+temps+"'/>";
+                selector.append(tempsField);
+
+                $('#'+param.Input.id).change(function(){
+                    currentDetailObject.temps(parseInt(this.value));
+                    this.value = SampleManager.instance.temps();
+                });
             }
         }
 
@@ -294,8 +360,8 @@
 
                     var tempoField = "Tempo (milliseconds) : ";
                     tempoField += "<input type='text' id='"+ param.Input.id + "' value='"+tempo+"'/>";
-
                     selector.append(tempoField);
+
                     $('#'+param.Input.id).change(function(){
                         if(SampleManager.instance != null){
                             SampleManager.instance.tempo(parseInt(this.value));
@@ -315,6 +381,10 @@
             Sample :    {className : 'sample',
                 Select :    {id : 'SampleSelect'},
                 Listen :    {id : 'SampleListen', className : 'listen'}
+            },
+            Temps :     {
+                className : 'temps',
+                Input : {id : 'TempsInput'}
             },
             Action :    {className : 'action',
                 DeleteBtn : {id : 'DeleteBtn'}
@@ -414,13 +484,19 @@
         this.getParentsArrowOfNode = function(_node){
             var parentArrows = new Array();
             nodeList.forEach(function(n){
-                n.childArrows().forEach(function(a){
-                    if(a.nextNode() == _node){
-                        parentArrows.push(a);
-                    }
-                });
+                if(n!=null){
+                    n.childArrows().forEach(function(a){
+                        if(a.nextNode() == _node){
+                            parentArrows.push(a);
+                        }
+                    });
+                }
             });
             return parentArrows;
+        };
+
+        this.getAllNodes = function(){
+            return nodeList;
         };
 
         this.getStartNodes = function(){
@@ -543,6 +619,7 @@
                     selector.addClass(type.className);
                     width = selector.width();
                     height = selector.height();
+                    that.move();
                     return true;
                 }
                 return false;
@@ -727,6 +804,20 @@
             return nextNode != null;
         };
 
+        var temps;
+        this.temps = function(_temps){
+            if(!isset(_temps)){
+                return temps;
+            }
+            else{
+                if(is_int(_temps)){
+                    temps = _temps;
+                    return true;
+                }
+                return false;
+            }
+        };
+
         /** Constructor **/
         if(isset(param)){
             NeonMusicComponent.call(this, {
@@ -738,6 +829,7 @@
                 'type' : valueOrDefault(param.type, Arrow.TypeEnum.DESIGN)
             });
             orientation = param.orientation;
+            temps = 1;
             nextNode = null;
             //Rotate
             this.selector().rotate(orientation.angle);
@@ -930,7 +1022,11 @@
         'assets/samples/Piano/piano_D.mp3',
         'assets/samples/Piano/piano_E.mp3',
         'assets/samples/Piano/piano_F.mp3',
-        'assets/samples/Piano/piano_G.mp3'
+        'assets/samples/Piano/piano_G.mp3',
+		'assets/samples/c1/b.mp3',
+		'assets/samples/c1/m.mp3',
+		'assets/samples/c1/h.mp3',
+		'assets/samples/c1/percu.mp3'
     ];
 
     /**
